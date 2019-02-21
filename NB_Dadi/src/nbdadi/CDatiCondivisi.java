@@ -5,6 +5,8 @@
  */
 package nbdadi;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * @author Tosetti Luca
  *
@@ -32,7 +34,8 @@ public class CDatiCondivisi {
      * Attributo che assume il valore del "terzo dado" 
      */
     private int terzoDado;
-
+    
+    private Semaphore joinSemaphore;
     /**
      * @brief: Metodo costruttore con parametri che inizializza la slot machine
      *
@@ -54,6 +57,11 @@ public class CDatiCondivisi {
         this.secondoDado = secondoDado;
         this.terzoDado = terzoDado;
         this.Elementi = 0;
+        joinSemaphore=new Semaphore(-3);
+    }
+
+    public Semaphore getJoinSemaphore() {
+        return joinSemaphore;
     }
 
     /**
@@ -73,6 +81,7 @@ public class CDatiCondivisi {
             schermo[i] = "";
         }
         this.Elementi = 0;
+        joinSemaphore=new Semaphore(-3);
     }
     /**
      * @brief Metodo get dell'attributo Elementi

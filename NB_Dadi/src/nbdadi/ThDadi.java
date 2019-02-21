@@ -98,7 +98,7 @@ public class ThDadi extends Thread {
         } catch (InterruptedException ex) {
 
         }
-
+        PtrDati.getJoinSemaphore().release();
     }
 
     void termina() {

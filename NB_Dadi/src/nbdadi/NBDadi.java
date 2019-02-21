@@ -55,10 +55,11 @@ public class NBDadi {
             th2.termina();
             th3.termina();
             thVis.termina();
-            th1.join();
-            th2.join();
-            th3.join();
-            thVis.join();
+//            th1.join();
+//            th2.join();
+//            th3.join();
+//            thVis.join();
+            dati.getJoinSemaphore().acquire();
             
             dati.VisualizzaSchermo();
             
