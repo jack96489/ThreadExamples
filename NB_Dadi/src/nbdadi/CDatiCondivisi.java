@@ -108,7 +108,7 @@ public class CDatiCondivisi {
      * @param primoDado valore da assegnare all'attributo primoDado
      *
      */
-    public void setPrimoDado(int primoDado) {
+    public synchronized void setPrimoDado(int primoDado) {
         this.primoDado = primoDado;
     }
 
@@ -134,7 +134,7 @@ public class CDatiCondivisi {
      * @param secondoDado valore da assegnare all'attributo secondoDado
      *
      */
-    public void setSecondoDado(int secondoDado) {
+    public synchronized void setSecondoDado(int secondoDado) {
         this.secondoDado = secondoDado;
     }
 
@@ -160,7 +160,7 @@ public class CDatiCondivisi {
      * @param terzoDado valore da assegnare all'attributo terzoDado
      *
      */
-    public void setTerzoDado(int terzoDado) {
+    public synchronized void setTerzoDado(int terzoDado) {
         this.terzoDado = terzoDado;
     }
     
@@ -204,7 +204,7 @@ public class CDatiCondivisi {
      * 
      * @param str Stringa in cui è contenuto il valore della linea di testo da memorizzare.
      */
-    public void aggiungiStringa(String str) {
+    public synchronized void aggiungiStringa(String str) {
         schermo[Elementi] = str;
         Elementi++;
     }
