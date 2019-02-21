@@ -83,7 +83,7 @@ public class ThVisualizza extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(ThVisualizza.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        PtrDati.getJoinSemaphore().release();
     }
 
         /**
