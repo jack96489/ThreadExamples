@@ -5,6 +5,8 @@
  */
 package nbdindondan;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Princess Joy Padua
@@ -17,15 +19,16 @@ public class DatiCondivisi {
      * Creo variabili di tipo int che mi vanno a contare i suoni effettuati dai thread.
      * 
      */
-    int contaDIN=0,contaDON=0,contaDAN=0;
-    
-    int maxElem=10000000;
-    String schermo[];
-    int p;
+    private int contaDIN=0,contaDON=0,contaDAN=0;
+    private Semaphore joinSemaphore;
+    private int maxElem=10000000;
+    private String schermo[];
+    private int p;
 
     public DatiCondivisi() {
         this.schermo=new String [maxElem];
         this.p=0;
+        joinSemaphore=new Semaphore(-2);
     }
 
     public DatiCondivisi(int contaDIN, int contaDON, int contaDAN) {
@@ -96,5 +99,9 @@ public class DatiCondivisi {
                 System.out.println("");
         }
         System.out.println("\n-------------------------------");
+    }
+
+    public Semaphore getJoinSemaphore() {
+        return joinSemaphore;
     }
 }
