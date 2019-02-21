@@ -95,7 +95,7 @@ public class DatiCondivisi {
      * @return nClop1 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo1
      */
-    public int getnClop1() {
+    public synchronized int getnClop1() {
         return nClop1;
     }
 
@@ -107,7 +107,7 @@ public class DatiCondivisi {
      * @return nClop2 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo2
      */
-    public int getnClop2() {
+    public synchronized int getnClop2() {
         return nClop2;
     }
 
@@ -119,7 +119,7 @@ public class DatiCondivisi {
      * @return nClop3 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo3
      */
-    public int getnClop3() {
+    public synchronized int getnClop3() {
         return nClop3;
     }
 
@@ -131,7 +131,7 @@ public class DatiCondivisi {
      * @return nClop4 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo4
      */
-    public int getnClop4() {
+    public synchronized int getnClop4() {
         return nClop4;
     }
 
@@ -143,7 +143,7 @@ public class DatiCondivisi {
      * @return nClop5 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo5
      */
-    public int getnClop5() {
+    public synchronized int getnClop5() {
         return nClop5;
     }
 
@@ -234,13 +234,13 @@ public class DatiCondivisi {
      * @brief Metodo che permette di visualizzare tutto il contenuto dello
      * schermo
      */
-    public void visualizzaLinee() {
+    public synchronized void visualizzaLinee() {
         for (int i = 0; i < this.primaPosizioneLibera; i++) {
             System.out.println(schermo[i]);
         }
     }
 
-    public Semaphore getJoinSemaphore() {
+    public synchronized Semaphore getJoinSemaphore() {
         return joinSemaphore;
     }
 
