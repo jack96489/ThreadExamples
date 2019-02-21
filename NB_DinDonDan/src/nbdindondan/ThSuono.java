@@ -35,7 +35,7 @@ public class ThSuono extends Thread {
     /**
      * Creo classe di tipo DatiCondivi che va a contare i suoni effettuati.
      */
-    DatiCondivisi ptrdati;
+    private DatiCondivisi ptrdati;
 
     /**
      * @param p
@@ -102,5 +102,6 @@ public class ThSuono extends Thread {
         } catch (InterruptedException ex) {
 
         }
+        ptrdati.getJoinSemaphore().release();
     }
 }
