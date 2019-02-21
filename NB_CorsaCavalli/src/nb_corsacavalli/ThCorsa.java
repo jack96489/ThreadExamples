@@ -125,5 +125,6 @@ public class ThCorsa extends Thread {
                 break;
 
         }
+        ptrDati.getJoinSemaphore().release();
     }
 }
