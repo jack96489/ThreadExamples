@@ -73,11 +73,12 @@ public class NB_CorsaCavalli {
             Clop5.interrupt();
 
             //attendi
-            Clop1.join();
-            Clop2.join();
-            Clop3.join();
-            Clop4.join();
-            Clop5.join();
+//            Clop1.join();
+//            Clop2.join();
+//            Clop3.join();
+//            Clop4.join();
+//            Clop5.join();
+            dati.getJoinSemaphore().acquire();
 
             int max = 0;
             int cavallo = 0;

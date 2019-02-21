@@ -82,6 +82,7 @@ public class DatiCondivisi {
         this.nClop4 = 0;
         this.nClop5 = 0;
 
+        joinSemaphore=new Semaphore(-4);
         schermo = new String[100000];
         primaPosizioneLibera = 0;
     }
@@ -237,6 +238,10 @@ public class DatiCondivisi {
         for (int i = 0; i < this.primaPosizioneLibera; i++) {
             System.out.println(schermo[i]);
         }
+    }
+
+    public Semaphore getJoinSemaphore() {
+        return joinSemaphore;
     }
 
 }
