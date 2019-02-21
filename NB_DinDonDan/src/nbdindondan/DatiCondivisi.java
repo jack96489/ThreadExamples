@@ -39,7 +39,7 @@ public class DatiCondivisi {
         this.p=0;
     }
 
-    public int getContaDIN() {
+    public synchronized int getContaDIN() {
         return contaDIN;
     }
 
@@ -47,7 +47,7 @@ public class DatiCondivisi {
         this.contaDIN = contaDIN;
     }
 
-    public int getContaDON() {
+    public synchronized int getContaDON() {
         return contaDON;
     }
 
@@ -55,7 +55,7 @@ public class DatiCondivisi {
         this.contaDON = contaDON;
     }
 
-    public int getContaDAN() {
+    public synchronized int getContaDAN() {
         return contaDAN;
     }
 
@@ -72,7 +72,7 @@ public class DatiCondivisi {
      * @return indica se hai vinto o no.
      * 
      */
-    public String verificaSeHaiVinto(int c) {
+    public synchronized String verificaSeHaiVinto(int c) {
         String x="Hai Perso";
         if(c==1 && contaDIN>contaDON && contaDIN>contaDAN) {
             x="Hai Vinto!";
@@ -91,7 +91,7 @@ public class DatiCondivisi {
         schermo[p]=x;
         p+=1;
     }
-    public void printSchermo() {
+    public synchronized void printSchermo() {
         System.out.println("-------------------------------");
         for (int i = 0; i < p; i ++) {
             System.out.print(schermo[i] + " ");
@@ -101,7 +101,7 @@ public class DatiCondivisi {
         System.out.println("\n-------------------------------");
     }
 
-    public Semaphore getJoinSemaphore() {
+    public synchronized Semaphore getJoinSemaphore() {
         return joinSemaphore;
     }
 }
