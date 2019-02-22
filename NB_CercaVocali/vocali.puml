@@ -1,0 +1,86 @@
+@startuml vocali
+
+actor Utente
+
+Utente -> Main: frase
+Utente -> Main: vocale che compare più volte
+
+Main -> ThVisualizza: start();
+Main -> ThA: start();
+Main -> ThE: start();
+Main -> ThI: start();
+Main -> ThO: start();
+Main -> ThU: start();
+
+loop Finchè ci sono lettere
+'ThA -> DatiCondivisi: mutexVocali.wait();
+ThA -> DatiCondivisi: incNum(A);
+'ThA -> DatiCondivisi: mutexVocali.signal();
+ThA -> DatiCondivisi: mutexSchermo.wait();
+ThA -> DatiCondivisi: schermo.push(vocale trovata);
+ThA -> DatiCondivisi: mutexSchermo.signal();
+ThVisualizza <- DatiCondivisi: getSchermo();
+ThVisualizza -> Utente: vocale trovata
+end
+ThA -> DatiCondivisi: setFinito(A);
+Main <- ThA: Join();
+
+loop Finchè ci sono lettere
+'ThE -> DatiCondivisi: mutexVocali.wait();
+ThE -> DatiCondivisi: incNum(E);
+'ThE -> DatiCondivisi: mutexVocali.signal();
+ThE -> DatiCondivisi: mutexSchermo.wait();
+ThE -> DatiCondivisi: schermo.push(vocale trovata);
+ThE -> DatiCondivisi: mutexSchermo.signal();
+ThVisualizza <- DatiCondivisi: getSchermo();
+ThVisualizza -> Utente: vocale trovata
+end
+ThE -> DatiCondivisi: setFinito(E);
+Main <- ThE: Join();
+
+loop Finchè ci sono lettere
+'ThI -> DatiCondivisi: mutexVocali.wait();
+ThI -> DatiCondivisi: incNum(I);
+'ThI -> DatiCondivisi: mutexVocali.signal();
+ThI -> DatiCondivisi: mutexSchermo.wait();
+ThI -> DatiCondivisi: schermo.push(vocale trovata);
+ThI -> DatiCondivisi: mutexSchermo.signal();
+ThVisualizza <- DatiCondivisi: getSchermo();
+ThVisualizza -> Utente: vocale trovata
+end
+ThI -> DatiCondivisi: setFinito(I);
+Main <- ThI: Join();
+
+loop Finchè ci sono lettere
+'ThO -> DatiCondivisi: mutexVocali.wait();
+ThO -> DatiCondivisi: incNum(O);
+'ThO -> DatiCondivisi: mutexVocali.signal();
+ThO -> DatiCondivisi: mutexSchermo.wait();
+ThO -> DatiCondivisi: schermo.push(vocale trovata);
+ThO -> DatiCondivisi: mutexSchermo.signal();
+ThVisualizza <- DatiCondivisi: getSchermo();
+ThVisualizza -> Utente: vocale trovata
+end
+ThO -> DatiCondivisi: setFinito(O);
+Main <- ThO: Join();
+
+loop Finchè ci sono lettere
+'ThU -> DatiCondivisi: mutexVocali.wait();
+ThU -> DatiCondivisi: incNum(U);
+'ThU -> DatiCondivisi: mutexVocali.signal();
+ThU -> DatiCondivisi: mutexSchermo.wait();
+ThU -> DatiCondivisi: schermo.push(vocale trovata);
+ThU -> DatiCondivisi: mutexSchermo.signal();
+ThVisualizza <- DatiCondivisi: getSchermo();
+ThVisualizza -> Utente: vocale trovata
+end
+ThU -> DatiCondivisi: setFinito(U);
+Main <- ThU: Join();
+
+
+Main <- ThVisualizza: Join();
+
+Main <- DatiCondivisi: getVincitore();
+Utente <- Main: vocale vincente
+
+@enduml
