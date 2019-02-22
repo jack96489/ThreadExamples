@@ -1,0 +1,116 @@
+@startuml Cavalli
+actor Utente
+participant main
+entity datiCondivisi
+
+Utente -> main ++ : start
+
+main -> datiCondivisi ** : new
+main -> thVisualizza ** : new
+main -> thVisualizza ++ : start
+main -> Clop1 ** : new
+main -> Clop1 ++ : start
+main -> Clop2 ** : new
+
+loop 50 passi
+Clop1 -> datiCondivisi: semLetto.Wait()
+Clop1 -> datiCondivisi: mutex.Wait()
+Clop1 -> datiCondivisi: incClop(1)
+Clop1 -> datiCondivisi: mutex.Signal()
+Clop1 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop1
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+
+Clop1 -> main -- : return
+note over main : join Clop1
+
+main -> Clop2 ++ : start
+
+loop 10 passi
+Clop2 -> datiCondivisi: semLetto.Wait()
+Clop2 -> datiCondivisi: mutex.Wait()
+Clop2 -> datiCondivisi: incClop(2)
+Clop2 -> datiCondivisi: mutex.Signal()
+Clop2 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop2
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+
+main -> Clop3 ** : new
+main -> Clop3 ++: start
+
+loop 50 passi
+Clop3 -> datiCondivisi: semLetto.Wait()
+Clop3 -> datiCondivisi: mutex.Wait()
+Clop3 -> datiCondivisi: incClop(3)
+Clop3 -> datiCondivisi: mutex.Signal()
+Clop3 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop3
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+Clop3 -> main --: return
+
+main -> Clop4 ** : new
+main -> Clop4 ++ : start
+loop 50 passi
+Clop4 -> datiCondivisi: semLetto.Wait()
+Clop4 -> datiCondivisi: mutex.Wait()
+Clop4 -> datiCondivisi: incClop(4)
+Clop4 -> datiCondivisi: mutex.Signal()
+Clop4 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop4
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+Clop4 -> main --: return
+
+loop 40 passi
+Clop2 -> datiCondivisi: semLetto.Wait()
+Clop2 -> datiCondivisi: mutex.Wait()
+Clop2 -> datiCondivisi: incClop(2)
+Clop2 -> datiCondivisi: mutex.Signal()
+Clop2 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop2
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+
+Clop2 -> main --: return
+
+note over main : join Clop2
+note over main : join Clop3
+note over main : join Clop4
+
+main -> Clop5 ** : new
+main -> Clop5 ++ : start
+
+loop 50 passi
+Clop5 -> datiCondivisi: semLetto.Wait()
+Clop5 -> datiCondivisi: mutex.Wait()
+Clop5 -> datiCondivisi: incClop(5)
+Clop5 -> datiCondivisi: mutex.Signal()
+Clop5 -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Clop5
+thVisualizza -> datiCondivisi: semLetto.Signal()
+end
+
+Clop5 -> main --: return
+note over main : join Clop5
+
+thVisualizza -> main --: return
+note over main : join thVisualizza
+
+main -> datiCondivisi : datiCondivisi.getVincitore()
+main -> Utente : cavallo vincitore
+@enduml
