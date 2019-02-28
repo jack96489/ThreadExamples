@@ -7,6 +7,8 @@ package nbdindondan;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -75,25 +77,21 @@ public class ThSuono extends Thread {
         try {
             while (verify == true) {
                 toWait.acquire();
-                if (faiSleep == true && faiYield == false) {
-                    System.out.println(suono);
+                if (faiSleep) {
+                    sleep(10);
                 }
-                if (faiYield == true && faiSleep == true) {
-                    System.out.println(suono);
+                if (faiYield) {
                     yield();
                 }
-                if (faiSleep == false && faiYield == true) {
-                    yield();
-                    ptrdati.aggiungi(suono);
-                    if (suono.equals("DIN")) {
-                        ptrdati.setContaDIN(ptrdati.getContaDIN() + 1);
-                    }
-                    if (suono.equals("DON")) {
-                        ptrdati.setContaDON(ptrdati.getContaDON() + 1);
-                    }
-                    if (suono.equals("DAN")) {
-                        ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
-                    }
+                ptrdati.aggiungi(suono);
+                if (suono.equals("DIN")) {
+                    ptrdati.setContaDIN(ptrdati.getContaDIN() + 1);
+                }
+                if (suono.equals("DON")) {
+                    ptrdati.setContaDON(ptrdati.getContaDON() + 1);
+                }
+                if (suono.equals("DAN")) {
+                    ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
                 }
                 int min = 100;
                 int max = 1000;
@@ -106,7 +104,7 @@ public class ThSuono extends Thread {
                 toSignal.release();
             }
         } catch (InterruptedException ex) {
-
+            Logger.getLogger(ThSuono.class.getName()).log(Level.SEVERE, null, ex);
         }
         ptrdati.getJoinSemaphore().release();
     }
