@@ -5,6 +5,7 @@
  */
 package nbdindondan;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -36,6 +37,7 @@ public class ThSuono extends Thread {
      * Creo classe di tipo DatiCondivi che va a contare i suoni effettuati.
      */
     private DatiCondivisi ptrdati;
+    private final Semaphore toWait, toSignal;
 
     /**
      * @param p
@@ -44,7 +46,7 @@ public class ThSuono extends Thread {
      * @param x Gli passo il suo da eseguire
      * @param y Scelta opzione
      */
-    public ThSuono(String x, int y, DatiCondivisi p) {
+    public ThSuono(String x, int y, DatiCondivisi p, Semaphore toWait, Semaphore toSignal) {
         suono = x;
         scelta = y;
         if (scelta == 1) {
@@ -60,6 +62,8 @@ public class ThSuono extends Thread {
             faiSleep = false;
         }
         ptrdati = p;
+        this.toSignal = toSignal;
+        this.toWait = toWait;
     }
 
     /**
@@ -70,6 +74,7 @@ public class ThSuono extends Thread {
         boolean verify = true;
         try {
             while (verify == true) {
+                toWait.acquire();
                 if (faiSleep == true && faiYield == false) {
                     System.out.println(suono);
                 }
@@ -98,6 +103,7 @@ public class ThSuono extends Thread {
                 if (Thread.currentThread().isInterrupted()) {
                     break;
                 }
+                toSignal.release();
             }
         } catch (InterruptedException ex) {
 

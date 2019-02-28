@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,9 +39,10 @@ public class NBDinDonDan {
          */
         DatiCondivisi dati = new DatiCondivisi();
 
-        ThSuono th1 = new ThSuono("DIN", 3, dati);
-        ThSuono th2 = new ThSuono("DON", 3, dati);
-        ThSuono th3 = new ThSuono("DAN", 3, dati);
+        final Semaphore semDin = new Semaphore(1), semDon = new Semaphore(0), semDan = new Semaphore(0);
+        ThSuono th1 = new ThSuono("DIN", 3, dati, semDan,semDin);
+        ThSuono th2 = new ThSuono("DON", 3, dati,semDin,semDon);
+        ThSuono th3 = new ThSuono("DAN", 3, dati,semDon,semDan);
         try {
             th1.start();
             th2.start();
