@@ -10,33 +10,35 @@ import java.util.concurrent.Semaphore;
 /**
  *
  * @author Princess Joy Padua
- * 
+ *
  */
 public class DatiCondivisi {
+
     /**
-     * @author Princess Joy Padua 
-     * 
-     * Creo variabili di tipo int che mi vanno a contare i suoni effettuati dai thread.
-     * 
+     * @author Princess Joy Padua
+     *
+     * Creo variabili di tipo int che mi vanno a contare i suoni effettuati dai
+     * thread.
+     *
      */
-    private int contaDIN=0,contaDON=0,contaDAN=0;
+    private int contaDIN = 0, contaDON = 0, contaDAN = 0;
     private Semaphore joinSemaphore;
-    private int maxElem=10000000;
+    private int maxElem = 10000000;
     private String schermo[];
     private int p;
 
     public DatiCondivisi() {
-        this.schermo=new String [maxElem];
-        this.p=0;
-        joinSemaphore=new Semaphore(-2);
+        this.schermo = new String[maxElem];
+        this.p = 0;
+        joinSemaphore = new Semaphore(-2);
     }
 
     public DatiCondivisi(int contaDIN, int contaDON, int contaDAN) {
         this.contaDIN = contaDIN;
         this.contaDON = contaDON;
         this.contaDAN = contaDAN;
-        this.schermo=new String [maxElem];
-        this.p=0;
+        this.schermo = new String[maxElem];
+        this.p = 0;
     }
 
     public synchronized int getContaDIN() {
@@ -62,41 +64,43 @@ public class DatiCondivisi {
     public synchronized void setContaDAN(int contaDAN) {
         this.contaDAN = contaDAN;
     }
-    
-    
-    
+
     /**
-     * 
+     *
      * @param c Indico la scelta effettuata dall'untete fatta nel main
-     * 
+     *
      * @return indica se hai vinto o no.
-     * 
+     *
      */
     public synchronized String verificaSeHaiVinto(int c) {
-        String x="Hai Perso";
-        if(c==1 && contaDIN>contaDON && contaDIN>contaDAN) {
-            x="Hai Vinto!";
+        String x = "Hai Perso";
+        if (c == 1 && contaDIN > contaDON && contaDIN > contaDAN) {
+            x = "Hai Vinto!";
         }
-        if(c==2 && contaDON>contaDIN && contaDON>contaDAN) {
-            x="Hai Vinto!";
+        if (c == 2 && contaDON > contaDIN && contaDON > contaDAN) {
+            x = "Hai Vinto!";
         }
-        if(c==3 && contaDAN>contaDON && contaDAN>contaDON) {
-            x="Hai Vinto!";
+        if (c == 3 && contaDAN > contaDON && contaDAN > contaDON) {
+            x = "Hai Vinto!";
         }
         return x;
     }
+
     public synchronized void aggiungi(String x) {
-        if (p >= maxElem)
+        if (p >= maxElem) {
             p = 0;
-        schermo[p]=x;
-        p+=1;
+        }
+        schermo[p] = x;
+        p += 1;
     }
+
     public synchronized void printSchermo() {
         System.out.println("-------------------------------");
-        for (int i = 0; i < p; i ++) {
+        for (int i = 0; i < p; i++) {
             System.out.print(schermo[i] + " ");
-            if (i % 20 == 19)
+            if (i % 20 == 19) {
                 System.out.println("");
+            }
         }
         System.out.println("\n-------------------------------");
     }
