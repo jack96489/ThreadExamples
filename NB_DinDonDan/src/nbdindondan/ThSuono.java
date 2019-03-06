@@ -93,10 +93,6 @@ public class ThSuono extends Thread {
                 if (suono.equals("DAN")) {
                     ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
                 }
-                int min = 100;
-                int max = 1000;
-                int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-                sleep(randomNum);
 
                 if (Thread.currentThread().isInterrupted()) {
                     break;
