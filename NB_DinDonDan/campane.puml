@@ -11,41 +11,42 @@ main -> thVisualizza ++ : start
 main -> Din ** : new
 main -> Din ++ : start
 main -> Don ** : new
-
-loop while(true)
-Din -> datiCondivisi: semLetto.Wait()
-Din -> datiCondivisi: mutex.Wait()
-Din -> datiCondivisi: incDin()
-Din -> datiCondivisi: mutex.Signal()
-Din -> datiCondivisi: semScritto.Signal()
-
-thVisualizza -> datiCondivisi: semScritto.Wait()
-thVisualizza -> Utente: Din
-thVisualizza -> datiCondivisi: semLetto.Signal()
-end
-
 main -> Don ++ : start
-loop while(true)
-Don -> datiCondivisi: semLetto.Wait()
-Don -> datiCondivisi: mutex.Wait()
-Don -> datiCondivisi: incDon()
-Don -> datiCondivisi: mutex.Signal()
-Don -> datiCondivisi: semScritto.Signal()
-
-thVisualizza -> datiCondivisi: semScritto.Wait()
-thVisualizza -> Utente: Don
-thVisualizza -> datiCondivisi: semLetto.Signal()
-end
-
 main -> Dan ** : new
 main -> Dan ++: start
 
 loop while(true)
-Dan -> datiCondivisi: semLetto.Wait()
-Dan -> datiCondivisi: mutex.Wait()
+'Din -> datiCondivisi: semLetto.Wait()
+'Din -> datiCondivisi: mutex.Wait()
+Din -> datiCondivisi: semDan.Wait()
+Din -> datiCondivisi: incDin()
+Din -> datiCondivisi: semDin.Signal()
+'Din -> datiCondivisi: mutex.Signal()
+'Din -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Din
+thVisualizza -> datiCondivisi: semLetto.Signal()
+
+'Don -> datiCondivisi: semLetto.Wait()
+'Don -> datiCondivisi: mutex.Wait()
+Din -> datiCondivisi: semDin.Wait()
+Don -> datiCondivisi: incDon()
+Din -> datiCondivisi: semDon.Signal()
+'Don -> datiCondivisi: mutex.Signal()
+'Don -> datiCondivisi: semScritto.Signal()
+
+thVisualizza -> datiCondivisi: semScritto.Wait()
+thVisualizza -> Utente: Don
+thVisualizza -> datiCondivisi: semLetto.Signal()
+
+'Dan -> datiCondivisi: semLetto.Wait()
+'Dan -> datiCondivisi: mutex.Wait()
+Din -> datiCondivisi: semDon.Wait()
 Dan -> datiCondivisi: incDan()
-Dan -> datiCondivisi: mutex.Signal()
-Dan -> datiCondivisi: semScritto.Signal()
+Din -> datiCondivisi: semDan.Signal()
+'Dan -> datiCondivisi: mutex.Signal()
+'Dan -> datiCondivisi: semScritto.Signal()
 
 thVisualizza -> datiCondivisi: semScritto.Wait()
 thVisualizza -> Utente: Dan
@@ -64,8 +65,6 @@ Dan -> main --: return
 Don -> main --: return
 note over main : join Don
 note over main : join Dan
-
-
 
 thVisualizza -> main --: return
 note over main : join thVisualizza

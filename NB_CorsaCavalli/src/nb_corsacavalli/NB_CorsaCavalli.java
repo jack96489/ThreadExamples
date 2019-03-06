@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 /**
  * @author Galimberti_Francesco
- *
  * @brief La classe CorsaCavalli40 permette di simulare una gara tra 5 cavalli
  * La classe collabora con le classi: ThCorsa, DatiCondivisi
  */
@@ -21,9 +20,8 @@ public class NB_CorsaCavalli {
 
     /**
      * @author Galimberti_Francesco
-     *
      * @brief Il metodo simula una gara-scommessa tra 5 cavalli.
-     *
+     * <p>
      * Il metodo permette all'utente di scegliere su quale cavallo puntare. Crea
      * e avvia i 5 Thread che corrispondono ai 5 cavalli. Quando l'utente digita
      * un tasto qualsiasi vengono visualizzati i galoppi dei cavalli altrimenti
@@ -38,7 +36,6 @@ public class NB_CorsaCavalli {
             java.io.BufferedReader console = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
             Scanner input = new Scanner(System.in);
 
-            boolean finito = false;
 
             DatiCondivisi dati = new DatiCondivisi();
             ThCorsa Clop1 = new ThCorsa(1, true, true, dati);
@@ -56,28 +53,11 @@ public class NB_CorsaCavalli {
             Clop4.start();
             Clop5.start();
 
-            while (!finito) {
+            while (!dati.isCorsaFinita()) {
                 dati.visualizzaLinee();
-                String s = console.readLine();
-                if (s.endsWith(" ")) {
-                    finito = true;
-                } else {
-                    clearConsole();
-                }
+                clearConsole();
             }
 
-            Clop1.interrupt();
-            Clop2.interrupt();
-            Clop3.interrupt();
-            Clop4.interrupt();
-            Clop5.interrupt();
-
-            //attendi
-//            Clop1.join();
-//            Clop2.join();
-//            Clop3.join();
-//            Clop4.join();
-//            Clop5.join();
             dati.getJoinSemaphore().acquire();
 
             int max = 0;
@@ -119,7 +99,7 @@ public class NB_CorsaCavalli {
             }
 
             System.out.println("Alla prossima!");
-        } catch (IOException | InterruptedException ex) {
+        } catch (InterruptedException ex) {
             Logger.getLogger(NB_CorsaCavalli.class.getName()).log(Level.SEVERE, null, ex);
         }
 
