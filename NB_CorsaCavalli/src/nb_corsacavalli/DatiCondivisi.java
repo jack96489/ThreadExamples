@@ -1,6 +1,5 @@
 /**
  * @author Galimberti_Francesco
- *
  * @version 4.0
  */
 package nb_corsacavalli;
@@ -17,6 +16,7 @@ import java.util.concurrent.Semaphore;
 public class DatiCondivisi {
 
     private Semaphore joinSemaphore;
+    private boolean corsaFinita;
     /**
      * @author Galimberti_Francesco
      *
@@ -82,9 +82,10 @@ public class DatiCondivisi {
         this.nClop4 = 0;
         this.nClop5 = 0;
 
-        joinSemaphore=new Semaphore(-4);
+        joinSemaphore = new Semaphore(-4);
         schermo = new String[100000];
         primaPosizioneLibera = 0;
+        corsaFinita = false;
     }
 
     /**
@@ -244,4 +245,11 @@ public class DatiCondivisi {
         return joinSemaphore;
     }
 
+    public synchronized boolean isCorsaFinita() {
+        return corsaFinita;
+    }
+
+    public synchronized void setCorsaFinita(boolean corsaFinita) {
+        this.corsaFinita = corsaFinita;
+    }
 }

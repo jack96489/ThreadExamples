@@ -1,6 +1,5 @@
 /**
  * @author Galimberti_Francesco
- *
  * @version 4.0
  */
 package nb_corsacavalli;
@@ -44,11 +43,11 @@ public class ThCorsa extends Thread {
 
     /**
      * @author Galimberti_Francesco
-     * 
+     *
      * @brief Costruttore con parametri che permette di inizializzare il numero
      * del cavallo, un oggetto nel quale verranno memorizzate informazione sul 
      * cavallo e l'utilizzo o meno dello yeld e dello sleep.     
-     * 
+     *
      * @param nThread il parametro serve per passare al metodo un valore intero
      * per inizializzare l'attributo che memorizza il numero del cavallo
      * @param usaSleep il parametro serve per passare al metodo un valore booleano per
@@ -79,14 +78,14 @@ public class ThCorsa extends Thread {
     @Override
     public void run() {
         int n = 0;
-        Random nRand=new Random();        
+        Random nRand = new Random();
         try {
-            while (true) {
+            while (n < 50 && !ptrDati.isCorsaFinita()) {
                 n++;
                 ptrDati.aggiungiLinea("Clop" + nThread);
-                
+
                 if (usaSleep) {
-                    Thread.sleep(nRand.nextInt(100)+1);
+                    Thread.sleep(nRand.nextInt(100) + 1);
                 }
                 if (usaYield) {
                     Thread.yield();
@@ -96,6 +95,7 @@ public class ThCorsa extends Thread {
                     break;
                 }
             }
+            ptrDati.setCorsaFinita(true);
         } catch (InterruptedException ex) {
             // Logger.getLogger(ThCorsa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,26 +104,20 @@ public class ThCorsa extends Thread {
             case 1:
                 ptrDati.setnClop1(n);
                 break;
-                
             case 2:
                 ptrDati.setnClop2(n);
                 break;
-                
             case 3:
                 ptrDati.setnClop3(n);
                 break;
-                
             case 4:
                 ptrDati.setnClop4(n);
                 break;
-                
             case 5:
                 ptrDati.setnClop5(n);
                 break;
-                
             default:
                 break;
-
         }
         ptrDati.getJoinSemaphore().release();
     }
